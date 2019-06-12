@@ -19,6 +19,12 @@ public class AddressAdapter extends BaseQuickAdapter<AddressBean, BaseViewHolder
     @Override
     protected void convert(BaseViewHolder helper, AddressBean item) {
         int layoutPosition = helper.getLayoutPosition();
-
+        helper.setText(R.id.tv_index, layoutPosition + 1 + "")
+                .setText(R.id.tv_name, item.getName())
+                .setText(R.id.tv_company, item.getCompany())
+                .setText(R.id.tv_email, item.getEmail())
+                .setText(R.id.tv_phone, item.getPhone_num())
+                .addOnClickListener(R.id.btn_modification)
+                .addOnClickListener(R.id.btn_delete);
     }
 }

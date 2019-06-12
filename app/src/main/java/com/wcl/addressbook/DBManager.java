@@ -28,7 +28,7 @@ public class DBManager {
 
     public static AddressBean inserStorage2DB(AddressBean bean) {
         AddressBeanDao addressBeanDao = MainAppliction.getInstance().getDaoSession().getAddressBeanDao();
-        addressBeanDao.insert(bean);
+        addressBeanDao.update(bean);
         return bean;
     }
 
@@ -38,7 +38,7 @@ public class DBManager {
     }
 
 
-    public static List<AddressBean> getAllStorageRccord() {
+    public static List<AddressBean> getAllRccord() {
         AddressBeanDao addressBeanDao = MainAppliction.getInstance().getDaoSession().getAddressBeanDao();
         List<AddressBean> beans = addressBeanDao.loadAll();
         return beans;
@@ -47,5 +47,17 @@ public class DBManager {
     public static void deleteAll() {
         AddressBeanDao addressBeanDao = MainAppliction.getInstance().getDaoSession().getAddressBeanDao();
         addressBeanDao.deleteAll();
+    }
+
+    public static List<AddressBean> queryByName(String name) {
+        AddressBeanDao addressBeanDao = MainAppliction.getInstance().getDaoSession().getAddressBeanDao();
+        List<AddressBean> nameLikes = addressBeanDao.queryBuilder().where(AddressBeanDao.Properties.Name.like("%" + name + "%")).list();
+        return nameLikes;
+    }
+
+    public static List<AddressBean> queryByPhoneNum(String phone) {
+        AddressBeanDao addressBeanDao = MainAppliction.getInstance().getDaoSession().getAddressBeanDao();
+        List<AddressBean> phoneLikes = addressBeanDao.queryBuilder().where(AddressBeanDao.Properties.Phone_num.like("%" + phone + "%")).list();
+        return phoneLikes;
     }
 }

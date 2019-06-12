@@ -15,7 +15,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,6 +28,7 @@
                 android:text="姓名" />
 
             <EditText
+                android:text="姓名"
                 android:id="@+id/edit_name_dialog"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />
@@ -45,6 +45,7 @@
                 android:text="工作单位" />
 
             <EditText
+                android:text="工作单位"
                 android:id="@+id/edit_comnapy_dialog"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />
@@ -61,9 +62,11 @@
                 android:text="联系电话" />
 
             <EditText
+                android:text="联系电话"
                 android:id="@+id/edit_phone_dialog"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,6 +80,7 @@
                 android:text="E-Mail" />
 
             <EditText
+                android:text="a@gmail.com"
                 android:id="@+id/edit_email_dialog"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content" />
