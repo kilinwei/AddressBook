@@ -129,10 +129,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDialogEditComnapy = (EditText) mInsertDialog.findViewById(R.id.edit_comnapy_dialog);
         mDialogEditPhone = (EditText) mInsertDialog.findViewById(R.id.edit_phone_dialog);
         mDialogEditEmail = (EditText) mInsertDialog.findViewById(R.id.edit_email_dialog);
-//        mDialogEditName.setText("");
-//        mDialogEditComnapy.setText("");
-//        mDialogEditPhone.setText("");
-//        mDialogEditEmail.setText("");
+        mDialogEditName.setText("");
+        mDialogEditComnapy.setText("");
+        mDialogEditPhone.setText("");
+        mDialogEditEmail.setText("");
         mInsertDialog.show();
     }
 
