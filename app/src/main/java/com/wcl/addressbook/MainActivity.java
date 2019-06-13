@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
         setContentView(R.layout.activity_main);
         initView();
     }
@@ -51,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mAllAddressBeans = DBManager.getAllRccord();
-        mAdapter = new AddressAdapter(this, R.layout.item, mAllAddressBeans);
+        mAdapter = new AddressAdapter(this, R.layout.item, null);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener(this);
     }
@@ -65,7 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String name = mEditName.getText().toString().trim();
                 String phone = mEditPhone.getText().toString().trim();
                 if (TextUtils.isEmpty(name) && TextUtils.isEmpty(phone)) {
-                    ToastUtil.showMessage("查询条件不能为空");
+                    mAllAddressBeans = DBManager.getAllRccord();
+                    mAdapter.setNewData(mAllAddressBeans);
+                    mAdapter.notifyDataSetChanged();
                 } else if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(phone)) {
                     ToastUtil.showMessage("抱歉,不支持双重条件查询!");
                 } else if (!TextUtils.isEmpty(name)) {
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //清除查询
                 mEditName.setText("");
                 mEditPhone.setText("");
-                mAllAddressBeans = DBManager.getAllRccord();
+                mAllAddressBeans = null;
                 mAdapter.setNewData(mAllAddressBeans);
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showInsertDialog() {
         mInsertDialog = new MaterialDialog.Builder(this)
-                .title("人脸角度限制")
+                .title("添加联系人")
                 .customView(R.layout.address_layout, true)
                 .positiveText(android.R.string.ok)
                 .negativeText(android.R.string.no)
@@ -138,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showModificationDialog(final AddressBean bean) {
         mModifiDialog = new MaterialDialog.Builder(this)
-                .title("人脸角度限制")
+                .title("修改联系人")
                 .customView(R.layout.address_layout, true)
                 .positiveText(android.R.string.ok)
                 .negativeText(android.R.string.no)

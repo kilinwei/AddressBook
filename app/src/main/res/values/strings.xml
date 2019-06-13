@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AddressBook</string>
+    <string name="app_name">通讯录管理系统</string>
     <string name="ok">确认</string>
     <string name="no">取消</string>
 </resources>
